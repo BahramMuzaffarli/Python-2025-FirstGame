@@ -1,0 +1,58 @@
+from flask import Flask, render_template
+
+app = Flask(__name__)
+
+# Home page
+@app.route("/")
+def home():
+    return "<h1>Salam yaxsilara to my simple Python website!</h1><p>This is the home page.</p>"
+
+# About page
+@app.route("/about")
+def about():
+    return "<h1>About</h1><p>This website is created using Flask.</p>"
+
+# Dynamic page example
+@app.route("/hello/<name>")
+def hello(name):
+    return f"<h1>Hello, {name}!</h1>"
+
+if __name__ == "__main__":
+    app.run(debug=True)
+
+
+
+
+# app.py
+@app.route("/gallery")
+def gallery():
+    import os
+    images = os.listdir("static/images")
+    return render_template("gallery.html", images=images)
+###################
+
+from flask import send_file
+
+@app.route("/gallery-local")
+def gallery_local():
+    return send_file(r"C:\Users\Asus\Pictures\Screenshots\gallery.jpg", mimetype='image/jpeg')
+
+
+from flask import Flask, send_file, render_template
+
+app = Flask(__name__)
+
+@app.route("/gallery-local")
+def gallery_local():
+    # Şəkilin tam path-i
+    return send_file(r"C:\Users\Asus\Pictures\Screenshots\gallery.jpg", mimetype='image/jpeg')
+
+@app.route("/")
+def home():
+    return render_template("index.html")
+
+if __name__ == "__main__":
+    app.run(debug=True)
+
+
+
